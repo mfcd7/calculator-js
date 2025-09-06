@@ -44,33 +44,39 @@ const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         if (button.classList.contains("operand")) {
-            if (result && !operator && shouldReset) {
-                leftNumber = button.innerText;
-                shouldReset = false;
-                rightNumber = "";
-                operator = "";
-            }
-            else if (zeroError) {
-                leftNumber = button.innerText;
-                rightNumber = "";
-                operator = "";
-                result = null;
-                shouldReset = false;
-                zeroError = false;
-            }
-            else if (!operator) {
-                leftNumber += button.innerText;
+            if (button.innerText === '.') {
+                if (!operator && !leftNumber.includes('.')) leftNumber += '.';
+                else if (operator && !rightNumber.includes('.')) rightNumber += '.';
             }
             else {
-                rightNumber += button.innerText;
+                if (zeroError) {
+                    leftNumber = button.innerText;
+                    rightNumber = "";
+                    operator = "";
+                    result = null;
+                    shouldReset = false;
+                    zeroError = false;
+                }
+                else if (result && !operator && shouldReset) {
+                    leftNumber = button.innerText;
+                    shouldReset = false;
+                    rightNumber = "";
+                    operator = "";
+                    result = null;
+                }
+                else if (!operator) {
+                    leftNumber += button.innerText;
+                }
+                else {
+                    rightNumber += button.innerText;
+                }
             }
-            result = null;
         }
         else if (button.classList.contains("operator")) {
             if (rightNumber) {
                 result = operate(leftNumber, operator, rightNumber);
-                
                 if (result === null) return;
+                result = parseFloat(result.toFixed(4));
 
                 leftNumber = result;
                 rightNumber = "";
@@ -79,11 +85,12 @@ buttons.forEach((button) => {
                 operator = button.innerText;
             }
         }
+        
         else if (button.classList.contains("equal-to")) {
             if (leftNumber && operator && rightNumber) {
                 result = operate(leftNumber, operator, rightNumber);
-
                 if (result === null) return;
+                result = parseFloat(result.toFixed(4));
                 
                 leftNumber = result;
                 operator = "";

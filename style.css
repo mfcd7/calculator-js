@@ -23,6 +23,10 @@ button {
     border-radius: 12px;
 }
 
+button:active {
+    transform: scale(0.95);
+}
+
 button.clear,
 button.delete,
 button.zero {
@@ -31,7 +35,8 @@ button.zero {
 
 .calculator-body {
     height: 520px;
-    width: 310px;
+    width: 90%;
+    max-width: 320px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,15 +45,19 @@ button.zero {
     background-color: gray;
     border-radius: 12px;
     margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .display {
     height: 100px;
-    width: 240px;
+    width: 220px;
     background-color: lightgray;
     border: 2px solid black;
     border-radius: 12px;
-    font-size: 24px;
+    font-size: 32px;
+    padding: 10px;
+    text-align: right;
+    overflow-wrap: break-word;
     margin-top: 10px;
 }
 
@@ -67,15 +76,21 @@ button.zero {
 }
 
 .operand {
-    background-color: darkseagreen;
-    color: black;
+    background-color: #4caf50;
+    color: white;
 }
 
 .operator {
-    background-color: yellow;
-    color: black;
+    background-color: #ff9500;
+    color: white;
+}
+
+button.clear, button.delete {
+    background-color: #f44336;
+    color: white;
 }
 
 .calculator-text {
     font-size: 24px;
+    font-weight: bold;
 }
